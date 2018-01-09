@@ -1,4 +1,4 @@
-# DP卡查器 ver1.0.0 (react-native + navigation + redux)
+## DP卡查器 ver1.0.0 (react-native + navigation + redux)
 
 适配android + ios双平台
 
