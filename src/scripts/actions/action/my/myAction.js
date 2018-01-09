@@ -104,10 +104,12 @@ export let onClick = (dispatch,navigate,tab)=>
                 break;
             //关于作者
             case MORE_MENU.About_Author:
+                disabled(dispatch, 200)            
                 TargetComponent = 'AboutAuthor';
                 break;
             //登录
             case MORE_MENU.Login:
+                disabled(dispatch, 200)            
                 TargetComponent = 'Login';
                 break;
         }
