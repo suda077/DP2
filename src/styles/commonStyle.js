@@ -16,6 +16,9 @@ module.exports = {
     font_size:{
         fontSize: 15
     },
+    font_size_bg: {
+        fontSize: 20
+    },
     flex_one:{
         flex:1
     },

@@ -159,9 +159,10 @@ class DrawComponent extends Component {
                     style={[
                         styles.img,
                         draw.result.length === 1 ? styles.imgOne : styles.imgEleven,
+                        // draw.result[i].isRoute === 0 ? { opacity: 1 } : { opacity: 0 }
                     ]}
                     duration={   
-                        draw.result[i].isRoute === 0 ?  0  : 300   
+                        draw.result[i].isRoute === 0 ?  0  : 1   
                     }
                     animation={           
                         draw.result[i].isRoute === 0 ? null :'zoomOut'
@@ -170,22 +171,33 @@ class DrawComponent extends Component {
                 <Animatable.Image
                     style={[ 
                         draw.result[i].isRoute === 1 ?
-                        (draw.result.length === 1 ? 
-                            (typeof(draw.result[i].url) !== 'object' ? styles.imgOneFrontLoading : styles.imgOne) : 
-                            (typeof(draw.result[i].url) !== 'object' ? styles.imgElevenFrontLoading : styles.imgEleven)) : 
+                        (Platform.OS==='ios' ? 
+                            (draw.result.length === 1 
+                            ? 
+                            // styles.imgOne : styles.imgEleven)
+                            // (typeof(draw.result[i].url) !== 'object' ? styles.imgOneFrontLoading : styles.imgOne) : 
+                            // (typeof(draw.result[i].url) !== 'object' ? styles.imgElevenFrontLoading : styles.imgEleven))
+                            (draw.result[i].url.indexOf('../') !== -1 ? styles.imgOneFrontLoading : styles.imgOne) :
+                            (draw.result[i].url.indexOf('../') !== -1 ? styles.imgElevenFrontLoading : styles.imgEleven))
+                            :
+                            (draw.result.length === 1 ? styles.imgOne : styles.imgEleven)
+                        ) : 
                         (draw.result.length === 1 ? styles.imgOneBack : styles.imgElevenBack),
                     ]}
                     // source={{ uri: CARD_URL + draw.result[i].id + '.jpg' }}
-                    source={ draw.result[i].url }                    
+                    source={
+                        Platform.OS === 'ios' 
+                        ? ((draw.result[i].url.indexOf('../') !== -1) ? require('../../../images/my/cardLoading.gif') : { uri: draw.result[i].url})
+                        : { uri: CARD_URL + draw.result[i].id + '.jpg' }
+                    }                    
                     duration={
                         draw.result[i].isRoute === 0 ? 0 : (draw.result.length === 1 ? 500 : 300)
                     }
                     animation={
-                        draw.result[i].isRoute === 0 ? null : (draw.result.length === 1 ? 'flipInY' : (Platform.OS == 'ios' ? 'zoomIn' : 'flipInY'))  
+                        draw.result[i].isRoute === 0 
+                        ? null 
+                        : (draw.result[i].animated ? (draw.result.length === 1 ? 'flipInY' : (Platform.OS == 'ios' ? 'zoomIn' : 'flipInY')) : null )  
                     }    
-                    onLoad={()=>{
-                        this.props.getImg(draw.result[i],draw.result[i].id)
-                    }}
                 />
             </TouchableOpacity>);
         }

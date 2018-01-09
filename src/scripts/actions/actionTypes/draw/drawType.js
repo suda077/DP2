@@ -18,6 +18,9 @@ export const ON_BLACK_PRESS = 'ON_BLACK_PRESS';
 export const ON_CONTENT_SIZE_CHANGE = 'ON_CONTENT_SIZE_CHANGE';
 //图片翻转
 export const CARD_ROUTE = 'CARD_ROUTE';
+//是否ss卡
+export const IS_SS = 'IS_SS';
+
 
 
 

@@ -1,6 +1,7 @@
 import { 
     Animated,
-    InteractionManager
+    InteractionManager,
+    Platform
  } from "react-native";
 import {
     ON_DRAW,
@@ -13,6 +14,7 @@ import {
     ON_BLACK_PRESS,
     ON_CONTENT_SIZE_CHANGE,
     CARD_ROUTE,
+    IS_SS
 } from '../../actionTypes/draw/drawType';
 import { disabled } from "../commonAction";
 import ArrayUtils from "../../../utils/ArrayUtils";
@@ -41,20 +43,30 @@ export let pickerShow = createAction(
 export let onDraw = 
     (dispatch, attribute, result, num) =>
         () => {
+            /* map方法不会触发componentWillUpdate方法 */
             //卡片删除
-            result.map((val, index) => {
-                val.isDelete++;
-                return val;
-            })
+            if (result.length>0){
+                result.map((val, index) => {
+                    val.isDelete++;
+                    return val;
+                })
+            }
+            /* END */
+
             Picker.hide();//滚轮隐藏
             let arr = isSS(num).filter(item => item.attribute === attribute);
             let number = Math.floor(Math.random() * arr.length);
             let append = Object.assign({}, arr[number])
             // let append = ArrayUtils.deepCopy(arr[number]);
-            // let append = arr[number]       
-            append.isRoute = 0;//是否旋转
-            append.isDelete = 0;//是否删除
-            append.url = require('../../../../images/my/cardLoading.gif')//初始图片显示
+            // let append = arr[number]    
+            //是否旋转
+            append.isRoute = 0;
+            //是否删除
+            append.isDelete = 0;
+            //初始图片显示
+            append.url = '../../../../images/my/cardLoading.gif';
+            //判断是否执行卡片翻转动画
+            append.animated = false;
 
             disabled(dispatch, 500, {
                 type: ON_DRAW,
@@ -68,10 +80,12 @@ export let onDrawEleven =
     (dispatch, result, num) => 
         () => {
             //卡片删除
-            result.map((val, index) => {
-                val.isDelete++;
-                return val;
-            })
+            if (result.length > 0) {
+                result.map((val, index) => {
+                    val.isDelete++;
+                    return val;
+                })
+            }
             Picker.hide();//滚轮隐藏
             let arrRes= [];
             for (let i = 0; i < 11; i++) {
@@ -80,7 +94,8 @@ export let onDrawEleven =
                 let append = Object.assign({}, arr[number])
                 append.isRoute = 0;//是否旋转
                 append.isDelete = 0;//是否删除
-                append.url = require('../../../../images/my/cardLoading.gif')//初始图片显示
+                append.url = '../../../../images/my/cardLoading.gif'//初始图片显示
+                append.animated = false;
 
                 /* push方法不会触发componentWillUpdate方法 */
                 arrRes.push(append);
@@ -103,24 +118,47 @@ export let onReset =
         }
     ;
 //图片翻转
-export let cardRoute = createAction(
-    CARD_ROUTE, (dispatch, i, result) => {
-        Picker.hide();
-
-        /* map方法不会触发componentWillUpdate方法 */
-        result.map((val, index) => {
-            if (index === i){
-                val.isRoute++;
+export let cardRoute = 
+    (dispatch, i, result) => 
+        ()=>{
+            Picker.hide();
+            result[i].isRoute++;
+            dispatch({
+                type: CARD_ROUTE
+            })
+            if (Platform.OS === 'ios'){
+                fetch(CARD_URL + result[i].id + '.jpg')
+                    .then(response => response.url)
+                    .then(url => {
+                        result[i].url = url;
+                        result[i].animated = true
+                        if (result[i].rarity === 'SS+') {
+                            dispatch({
+                                type: IS_SS,
+                                payload: 1
+                            })
+                            return
+                        };
+                        dispatch({
+                            type: IS_SS
+                        })
+                    })
+            }else{
+                result[i].animated = true                
+                if (result[i].rarity === 'SS+') {
+                    dispatch({
+                        type: IS_SS,
+                        payload: 1
+                    })
+                    return
+                };
+                dispatch({
+                    type: IS_SS
+                })
             }
-            return val;
-        })
-        /* END */
+            
 
-        // disabled(dispatch, 150)
-
-        if (result[i].rarity === 'SS+') return 1;
-    }
-);
+    };
 
 //概率框确定
 export let onPickerConfirm = createAction(
@@ -157,15 +195,3 @@ export let cardDetail =
             disabled(dispatch,300)
         }
 ;
-
-//读取图片
-export let getImg = 
-    (result, id)=>
-        ()=>{
-            fetch(CARD_URL + id + '.jpg')
-                .then(response => response.url)
-                .then(url => {
-                    result.url = { uri: url };
-                })
-            
-        }

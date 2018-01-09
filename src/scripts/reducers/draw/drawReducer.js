@@ -6,6 +6,7 @@ import {
     ON_PICKER_SELECT,
     ON_RESET,
     CARD_ROUTE,
+    IS_SS
 } from '../../actions/actionTypes/draw/drawType';
 import { DISABLED_FALSE } from "../../actions/actionTypes/commonType";
 
@@ -17,7 +18,7 @@ const initState ={
     ssNum: 0,//ss抽到次数
     num: '7',
     img: require('../../../images/card/noimg.jpg'),
-    loading: false
+    loading: false,//抽卡按键变色
 };
 
 export default handleActions({
@@ -59,9 +60,17 @@ export default handleActions({
     [CARD_ROUTE]:{
         next(state, action) {
             return { ...state, 
-                ssNum: action.payload === 1 ? state.ssNum + 1 : state.ssNum,
+                // ssNum: action.payload === 1 ? state.ssNum + 1 : state.ssNum,
                 drawNum: state.drawNum + 1
             };
         } 
+    },
+    [IS_SS]: {
+        next(state, action) {
+            return {
+                ...state,
+                ssNum: action.payload === 1 ? state.ssNum + 1 : state.ssNum,
+            };
+        }
     },
 }, initState);

@@ -170,12 +170,14 @@ class SearchComponent extends Component {
         let arr = this.props.search.searchArr.map((item, index) => {
             return (
                 <View key={index} >
-                    <TouchableOpacity style={[styles.searchContent, styles.searchHistory]} onPress={() => {
+                    <TouchableOpacity style={[styles.searchHistory]} onPress={() => {
                         this._historyChoice(item)
                     }}>
-                        <Text style={GlobalStyles.font_size}>{item}</Text>
+                        <Text style={[GlobalStyles.font_size,styles.hisLeft]}>{item}</Text>
 
-                        <TouchableOpacity activeOpacity={1} style={styles.fork} onPress={() => { this._deleteSearchItem(item) }}><Image style={styles.fork} source={require('../../../images/ic_fork.png')} /></TouchableOpacity>
+                        <TouchableOpacity activeOpacity={1} style={[styles.forkContainer]} onPress={() => { this._deleteSearchItem(item) }}>
+                            <Image style={styles.fork} source={require('../../../images/ic_fork.png')} />
+                        </TouchableOpacity>
 
                     </TouchableOpacity>
                     <View style={GlobalStyles.line} />
@@ -185,7 +187,9 @@ class SearchComponent extends Component {
         return (
             this.props.search.searchHistory ?
                 <View>
-                    <View style={[styles.searchContent, styles.searchContentExtendd]}><Text style={GlobalStyles.font_size}>搜索历史</Text></View>
+                    <View style={[styles.searchContentExtendd]}>
+                        <Text style={GlobalStyles.font_size}>搜索历史</Text>
+                    </View>
                     <View style={GlobalStyles.line} />
                     {arr}
                     <Text style={styles.clearHistory} onPress={() => { this._removeSearchItem() }}>清空历史</Text>
@@ -264,6 +268,8 @@ class SearchComponent extends Component {
                         {listView}
                     </TouchableOpacity>
                 </ScrollView> 
+
+                {/* <Image source={require('../../../images/show/z.gif')}/> */}
 
             </View>
         )

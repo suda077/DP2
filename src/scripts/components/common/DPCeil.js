@@ -47,24 +47,18 @@ class DPCeil extends Component{
 
 	//读取图片资源
 	_onImgLoad = () => {
-		
+
 		// Platform.OS === 'ios' ?
-		fetch(CARD_URL + this.props.data.id + '.jpg')
-			.then(response => response.url)
-			.catch(error => {
-				this.setState({ img: require('../../../images/card/noimg.jpg') })				
-			})
-			.then(res => {
-				this.setState({ img: { uri: res } })
-			})
-			.catch(error=>{
-				this.setState({ img: require('../../../images/card/noimg.jpg') })
-			}) 
-		// : new Promise((resolve,reject)=>{
-		// 	resolve(CARD_URL + this.props.data.id + '.jpg')
-		// })
-		// .then(res => this.setState({ img: { uri: res } }))
-		// .catch(error => { this.setState({ img: require('../../../images/card/noimg.jpg') })})
+		// fetch(CARD_URL + this.props.data.id + '.jpg')
+		// 	.then(response => response.url)
+		// 	.then(res => {
+		// 		// this.setState({ img: { uri: res } })
+		// 	})
+		// 	.catch(error=>{
+		// 		// this.setState({ img: require('../../../images/card/noimg.jpg') })
+		// 	}) :
+		this.setState({ img: { uri: CARD_URL + this.props.data.id + '.jpg' } })
+		
 
 	}
 
@@ -96,7 +90,9 @@ class DPCeil extends Component{
 								animation={'fadeInLeft'}
 								duration={400}
 								delay={cardLeft.timer+200}
-								onLoad={this._onImgLoad.bind(this)}
+								onLoad={
+									this._onImgLoad.bind(this)
+								}
 							/>
 						</View>
 							<Animatable.View

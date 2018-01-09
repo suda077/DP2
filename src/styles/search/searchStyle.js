@@ -51,7 +51,8 @@ export default StyleSheet.create({
     clearHistory: {
         color: '#2196F3',
         textAlign: 'center',
-        paddingTop:10
+        paddingTop:20,
+        fontSize:15
     },
     markColor:{
         color:'red'
@@ -60,8 +61,8 @@ export default StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingTop: 8,
-        paddingBottom: 8,
+        // paddingTop: 8,
+        // paddingBottom: 8,
     },
     searchContent: {
         paddingLeft: 20,
@@ -84,7 +85,17 @@ export default StyleSheet.create({
         paddingTop: 200
     },
     fork: { 
-        height: 15, 
-        width: 15 
+        height: 20, 
+        width: 20,
+    },
+    forkContainer: {
+        height: 50,
+        width: 50,
+        // backgroundColor:'red',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    hisLeft:{
+        marginLeft:20
     }
 })
