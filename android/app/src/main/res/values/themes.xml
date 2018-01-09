@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<style name="DefaultExplainingPermissionsTheme" parent="Theme.AppCompat.Light.Dialog.Alert">-->
+        <!--&lt;!&ndash; Used for the 按钮 &ndash;&gt;-->
+        <!--<item name="colorAccent">@color/catalyst_redbox_background</item>-->
+
+        <!--&lt;!&ndash; Used for the 标题和文本 &ndash;&gt;-->
+        <!--<item name="android:textColorPrimary">@drawable/abc_btn_rating_star_off_mtrl_alpha</item>-->
+
+        <!--&lt;!&ndash; Used for the 背景 &ndash;&gt;-->
+        <!--<item name="android:background">@drawable/res_images_card_tree</item>-->
+    <!--</style>-->
+</resources>
