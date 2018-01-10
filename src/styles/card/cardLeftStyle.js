@@ -61,11 +61,13 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 10,
+        marginTop:5
     },
     footerOne:{
         height: 30, 
         alignItems: 'center', 
         justifyContent: 'flex-start',
+        marginTop:5
     },
     footNone: { 
         color: '#999999', 

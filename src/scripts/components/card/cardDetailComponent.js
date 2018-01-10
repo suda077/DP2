@@ -129,7 +129,7 @@ class CardDetailComponent extends Component{
 					<Image 
 						style={styles.img} 
 						source={cardDetail.img} 
-						onLoadEnd={this._onImgLoad.bind(this)}
+						onLoadStart={this._onImgLoad.bind(this)}
 					/>
 				</TouchableOpacity>
 				<View style={styles.discriptionTitle}>

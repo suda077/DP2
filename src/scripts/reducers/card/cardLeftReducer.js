@@ -41,7 +41,7 @@ export default handleActions({
         next(state, action) {
             return {
                 ...state,
-                timer:500
+                timer:0
             };
         }
     },
@@ -77,7 +77,7 @@ export default handleActions({
                 ds: state.ds.concat(state.dsArr.slice(state.index, state.end)), 
                 index: state.index + state.item,
                 end: state.end + state.item,
-                timer: 500,
+                timer: 0,
                 showFoot: state.dsArr.length <= state.end ? 1 :0,
             };
         }
@@ -99,7 +99,7 @@ export default handleActions({
     },
     [ON_CHOICE_RARITY]: {
         next(state, action) {
-            return { ...state, isChoiceRarity: action.payload, timer:500,
+            return { ...state, isChoiceRarity: action.payload, timer:0,
                 ds: DP.filter(item =>
                     (action.payload !== 'all' ? item.rarity === action.payload : true) &&
                     (state.isChoiceAttribute !== 'all' ? item.attribute === state.isChoiceAttribute : true) &&
@@ -120,7 +120,7 @@ export default handleActions({
     },
     [ON_CHOICE_ATTRIBUTE]: {
         next(state, action) {
-            return { ...state, isChoiceAttribute: action.payload, timer:500,
+            return { ...state, isChoiceAttribute: action.payload, timer:0,
                 ds: DP.filter(item =>
                     (state.isChoiceRarity !== 'all' ? item.rarity === state.isChoiceRarity : true) &&
                     (action.payload !== 'all' ? item.attribute === action.payload : true) &&
@@ -141,7 +141,7 @@ export default handleActions({
     },
     [ON_CHOICE_TAG]: {
         next(state, action) {
-            return { ...state, isChoiceTag: action.payload, timer:500,
+            return { ...state, isChoiceTag: action.payload, timer:0,
                 ds: DP.filter(item =>
                     (state.isChoiceRarity !== 'all' ? item.rarity === state.isChoiceRarity : true) &&
                     (state.isChoiceAttribute !== 'all' ? item.attribute === state.isChoiceAttribute : true) &&
@@ -162,7 +162,7 @@ export default handleActions({
     },
     [ON_CHOICE_RACE]: {
         next(state, action) {
-            return { ...state, isChoiceRace: action.payload, timer:500,
+            return { ...state, isChoiceRace: action.payload, timer:0,
                 ds: DP.filter(item =>
                     (state.isChoiceRarity !== 'all' ? item.rarity === state.isChoiceRarity : true) &&
                     (state.isChoiceAttribute !== 'all' ? item.attribute === state.isChoiceAttribute : true) &&

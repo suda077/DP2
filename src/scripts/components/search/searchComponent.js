@@ -113,14 +113,12 @@ class SearchComponent extends Component {
             item
         )
     }
-
     //删除历史
     _deleteSearchItem = (name) => {
         this.props.deleteSearchItem(
             this.props.navigation.dispatch,
             name
         )
-       
     }
     //清空历史
     _removeSearchItem = () => {

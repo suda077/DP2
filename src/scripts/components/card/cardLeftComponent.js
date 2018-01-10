@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PureComponent } from 'react';
 import {
   StyleSheet,
   Text,
@@ -11,7 +11,8 @@ import {
   Dimensions,
   Animated,
   ActivityIndicator,//显示一个圆形的loading提示符号。
-  Platform
+  Platform,
+  VirtualizedList
 } from 'react-native';
 
 import { connect } from "react-redux";
@@ -39,9 +40,9 @@ class CardLeftComponent extends Component{
   componentWillUnmount() {
     this.backPress.componentWillUnmount();
   }
-  shouldComponentUpdate(nextProps,nextState){
-    return nextProps !== this.props;
-  }
+  // shouldComponentUpdate(nextProps,nextState){
+  //   return nextProps !== this.props;
+  // }
   _pageInit =()=>{
     this.props.pageInit(
       this.props.navigation.dispatch
@@ -120,23 +121,74 @@ class CardLeftComponent extends Component{
     let flatList = cardLeft.ds.length !== 0 ?
       <View style={cardLeft.loading ? styles.isLoadingTrue : styles.isLoadingFalse}>
         <FlatList
+          //在列表头部添加RefreshControl控件
           onRefresh={() => {this._onRefresh() }}
+          //当等待数据进行更新时，将这个属性设置为true
           refreshing={cardLeft.refreshing}
+          //数据
           data={cardLeft.ds}
-          initialNumToRender={7}  //指定一开始渲染的元素数量
+          //指定一开始渲染的元素数量
+          initialNumToRender={7} 
           keyExtractor={(item) => item.id}
+          //每行渲染组件 
           renderItem={({ item }) => this.renderRow(item)}
+          //FlatList为空时渲染组件
           ListEmptyComponent={this.listEmptyComponent()}
+          //避免动态测量尺寸开销
           getItemLayout={(data, index) => (
-            //避免动态测量尺寸开销
             { length: 85, offset: 85 * index, index }
           )}
           //避免页面不渲染情况
           removeClippedSubviews={false}
+          //底部组件
           ListFooterComponent={this.renderFooter()}
+          //当列表被滚动到距离内容最底部不足 onEndReachedThreshold 的距离时调用
           onEndReached={this._onEndReached.bind(this)}
-          onEndReachedThreshold={Platform.OS==='android'?1:0}
+          //决定当距离内容最底部还有多远时触发 onEndReached 回调
+          onEndReachedThreshold={Platform.OS==='android'?1:0.5}
+          //设置可视区外最大能被渲染的元素的数量
+          windowSize={2}
         />
+        {/* <VirtualizedList
+          //数据
+          data={cardLeft.ds}
+          extraData={this.props}
+          //决定块中元素数量
+          getItemCount={(data) => data.length}
+          //通用的获取器，用来从任意类型的数据块中获取一个元素。
+          getItem={(data,index)=>{
+            let ds = {...data};
+            return ds
+          }}
+          //知道内容的高度后避免动态测量尺寸开销
+          getItemLayout={(data, index) => (
+            { length: 85, offset: 85 * index, index }
+          )}
+          //为给定的item生成一个不重复的key
+          keyExtractor={(item,index) => item[index].id}
+          //在列表头部添加RefreshControl控件
+          onRefresh={() => { this._onRefresh() }}
+          //当等待数据进行更新时，将这个属性设置为true
+          refreshing={cardLeft.refreshing}
+          //指定一开始渲染的元素数量
+          initialNumToRender={7} 
+          //每行渲染组件 
+          renderItem={({ item,index }) => this.renderRow(item[index])}
+          //减轻渲染系统的工作负担
+          removeClippedSubviews={true}
+          //FlatList为空时渲染组件
+          ListEmptyComponent={this.listEmptyComponent()}
+          //底部组件
+          ListFooterComponent={this.renderFooter()}
+          //当列表被滚动到距离内容最底部不足 onEndReachedThreshold 的距离时调用
+          onEndReached={this._onEndReached.bind(this)}
+          //决定当距离内容最底部还有多远时触发 onEndReached 回调
+          onEndReachedThreshold={Platform.OS === 'android' ? 1 : 0.5}
+          //避免页面不渲染情况
+          removeClippedSubviews={false}
+          //设置可视区外最大能被渲染的元素的数量
+          windowSize={2}
+        /> */}
     </View> 
     : <View style={styles.searchEmpty}><Text >搜索结果为空 ┑(￣Д ￣)┍</Text></View>
     

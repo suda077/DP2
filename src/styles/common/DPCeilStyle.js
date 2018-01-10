@@ -14,7 +14,14 @@ export default StyleSheet.create({
         // paddingTop:5,
         // paddingBottom: 5,
         /* 非动画效果 */
-        padding: 5
+        padding:5,
+        // marginTop:5,
+        borderWidth:0.5,
+        borderColor: '#B0B3BC',
+        
+        height: 85,
+        zIndex: 10,
+        overflow: 'hidden',//未显示的列表页隐藏
     },
     rightContainer: {
         flex: 1,
@@ -36,7 +43,13 @@ export default StyleSheet.create({
     },
     img:{
         width: 50,
-        height: 75
+        height: 75,
+        position: 'relative',
+        marginRight: 5
+    },
+    imgMove:{
+        position: 'relative',
+        marginRight: 5
     },
     tiaozhuan: { 
         flexDirection: 'row',
