@@ -1,7 +1,7 @@
 //页面初始化
 export const PAGE_INIT = 'PAGE_INIT';
 //loading页面取消
-export const LOADING_FALSE = 'LOADING_FALSE';
+export const LOADING_TRUE = 'LOADING_TRUE';
 //下拉刷新
 export const ON_REFRESH_TRUE = 'ON_REFRESH_TRUE';
 //取消下拉刷新

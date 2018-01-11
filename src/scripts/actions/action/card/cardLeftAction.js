@@ -1,6 +1,6 @@
 import {
     PAGE_INIT,
-    LOADING_FALSE,
+    LOADING_TRUE,
     ON_DRAWER,
     ON_REFRESH_TRUE,
     ON_REFRESH_FALSE,
@@ -17,10 +17,10 @@ export let pageInit = (dispatch)=>
         dispatch({ 
             type: PAGE_INIT
         });
-        let timeout = setTimeout(() => {
-            dispatch({ type: LOADING_FALSE });
-            timeout && clearTimeout(timeout)
-        }, 2000);
+        // let timeout = setTimeout(() => {
+            // dispatch({ type: LOADING_TRUE });
+            // timeout && clearTimeout(timeout)
+        // }, 2000);
     }
 //打开抽屉筛选
 export let onDrawer = (navigate)=>

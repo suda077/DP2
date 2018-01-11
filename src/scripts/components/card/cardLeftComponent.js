@@ -147,7 +147,7 @@ class CardLeftComponent extends Component{
           //决定当距离内容最底部还有多远时触发 onEndReached 回调
           onEndReachedThreshold={Platform.OS==='android'?1:0.5}
           //设置可视区外最大能被渲染的元素的数量
-          windowSize={2}
+          windowSize={1}
         />
         {/* <VirtualizedList
           //数据
@@ -197,19 +197,18 @@ class CardLeftComponent extends Component{
           //判断下拉读取条是否显示
         <View style={GlobalStyles.flex_one}>
 
-          {cardLeft.loading  ? 
-          <View style={[styles.loading]}>
-            <Image style={styles.imgEmpty} source={require('../../../images/my/cardLoading.gif')} />
-          </View>
-          : null} 
-
           <NavigationBar 
             title='卡片图鉴'
             theme={common.themeColor}
             rightButton={this.cardChoice()}
             style={[GlobalStyles.shadow,{marginBottom:1}]}/>
           
-          {flatList}
+          {cardLeft.loading ?
+          <View style={[styles.loading]}>
+            <Image style={styles.imgEmpty} source={require('../../../images/my/cardLoading.gif')} />
+          </View>
+          : flatList} 
+          
       </View> 
     )
   }

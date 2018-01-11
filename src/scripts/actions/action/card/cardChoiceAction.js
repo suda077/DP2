@@ -6,7 +6,7 @@ import {
 } from '../../actionTypes/card/cardChoiceType';
 import {
     PAGE_INIT,
-    LOADING_FALSE,
+    LOADING_TRUE,
 } from '../../actionTypes/card/cardLeftType';
 import { InteractionManager} from 'react-native';
 
@@ -43,12 +43,10 @@ export let onResetData = (dispatch,navigate) =>
     () => {
         navigate('DrawerClose');
         InteractionManager.runAfterInteractions(() => {
-            dispatch({
-                type: PAGE_INIT
-            });
+            dispatch({ type: LOADING_TRUE });            
         })
         let timeout = setTimeout(() => {
-            dispatch({ type: LOADING_FALSE });
+            dispatch({ type: PAGE_INIT });            
             timeout && clearTimeout(timeout)
         }, 2000);
     }

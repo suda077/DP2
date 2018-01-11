@@ -87,7 +87,8 @@ class DPCeil extends Component{
 						source={this.state.img} 																
 						animation={'fadeInLeft'}
 						duration={400}
-						delay={cardLeft.timer+200}
+						// delay={cardLeft.timer+200}
+						delay={200}
 						onLoad={
 							this._onImgLoad.bind(this)
 						}
@@ -96,7 +97,7 @@ class DPCeil extends Component{
 						style={GlobalStyles.flex_one}
 						animation={'fadeIn'}
 						duration={800}
-						delay={cardLeft.timer}
+						// delay={cardLeft.timer}
 					>
 						<View style={GlobalStyles.flex_row}>
 							<Text>{this.props.data.rarity}</Text>

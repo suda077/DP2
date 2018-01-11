@@ -6,3 +6,4 @@
 * 模拟抽卡
 * 用户登录
 * 搜索功能
+![image](https://github.com/suda077/DP2/tree/master/src/images/show/draw_ios.gif)

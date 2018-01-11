@@ -1,6 +1,6 @@
 import {
     PAGE_INIT,
-    LOADING_FALSE,
+    LOADING_TRUE,
     ON_REFRESH_TRUE,
     ON_REFRESH_FALSE,
     ON_END_REACHED,
@@ -22,13 +22,13 @@ import { handleActions } from 'redux-actions';
 const initState = {
     dsArr:[],//原数据
     ds: [],//显示数据,
-    loading: true,
+    loading: true,//loading图标(暂时废弃)
     isChoiceRarity: 'all',
     isChoiceAttribute: 'all',
     isChoiceTag: 'all',
     isChoiceRace: 'all', 
     timer:2000,//动画延迟载入时间
-    refreshing:false,
+    refreshing:false,//下拉刷新
     showFoot: 0,// 控制foot， 0：隐藏footer  1：已加载完成,没有更多数据   2 ：显示加载中,
     index: 0,//下拉刷新数组下标start
     end: 0,//下拉刷新数组下标end
@@ -51,7 +51,7 @@ export default handleActions({
                 ...state,
                 dsArr: DP,
                 ds: DP.slice(0, state.item), 
-                loading: true, 
+                loading: false, 
                 timer: 2000, 
                 isChoiceRarity: 'all',
                 isChoiceAttribute: 'all',
@@ -61,6 +61,11 @@ export default handleActions({
                 end: state.item * 2,
                 showFoot: 0
             };
+        }
+    },
+    [LOADING_TRUE]: {
+        next(state, action) {
+            return { ...state, loading: true };
         }
     },
     [SHOW_FOOT]: {
@@ -80,11 +85,6 @@ export default handleActions({
                 timer: 0,
                 showFoot: state.dsArr.length <= state.end ? 1 :0,
             };
-        }
-    },
-    [LOADING_FALSE]: {
-        next(state, action) {
-            return { ...state, loading:false };
         }
     },
     [ON_REFRESH_TRUE]: {

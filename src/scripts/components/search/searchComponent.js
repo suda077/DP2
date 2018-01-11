@@ -267,7 +267,7 @@ class SearchComponent extends Component {
                     </TouchableOpacity>
                 </ScrollView> 
 
-                {/* <Image source={require('../../../images/show/z.gif')}/> */}
+                {/* <Image source={require('../../../images/show/draw.gif')}/> */}
 
             </View>
         )

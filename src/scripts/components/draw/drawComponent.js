@@ -256,7 +256,7 @@ class DrawComponent extends Component {
                     title={'偷渡欧洲(。・`ω´・)'}
                     theme={common.themeColor}
                     style={GlobalStyles.shadow} />
-
+                {/* <Image source={require('../../../images/show/draw_ios.gif')} /> */}
                 <TouchableOpacity 
                     style={GlobalStyles.flex_one} 
                     activeOpacity={1}
