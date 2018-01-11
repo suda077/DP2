@@ -10,3 +10,6 @@
 ### IOS：
 ![image](https://github.com/suda077/DP2/raw/master/src/images/show/draw_ios_2.gif)![image](https://github.com/suda077/DP2/raw/master/src/images/show/card_ios_2.gif)![image](https://github.com/suda077/DP2/raw/master/src/images/show/search_ios_2.gif)
 
+### ANDROID：
+![image](https://github.com/suda077/DP2/raw/master/src/images/show/draw_android_2.gif)![image](https://github.com/suda077/DP2/raw/master/src/images/show/card_android_2.gif)![image](https://github.com/suda077/DP2/raw/master/src/images/show/search_android_2.gif)
+
